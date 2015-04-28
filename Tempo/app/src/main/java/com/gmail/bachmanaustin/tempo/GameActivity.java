@@ -1,45 +1,42 @@
 package com.gmail.bachmanaustin.tempo;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+public class GameActivity extends Activity {
+
+    private static final String TAG = "MainActivity";
+    private GameLoopThread thread;
 
 
-public class GameActivity extends ActionBarActivity {
-
-    Bitmap bg;
-
+    /** Called when the activity is first created. */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new GameSurfaceView(this));
-        getSupportActionBar().hide();
+        GameSurfaceView surfaceView = new GameSurfaceView(this, null);
+        setContentView(surfaceView);
+        thread = surfaceView.getRenderThread();
+        thread.start();
+
 
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_game, menu);
-        return true;
-    }
+    protected void onDestroy() {
+        super.onDestroy();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Log.i(TAG, "destroying");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        thread.halt();
+        boolean retry = true;
+        while (retry) {
+            try {
+                thread.join();
+                retry = false;
+            } catch (InterruptedException e) {
+            }
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
 }

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -13,7 +14,7 @@ import android.view.SurfaceView;
  * Created by Owner on 4/28/2015.
  */
 public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callback{
-    private SurfaceHolder sh;
+    private final GameLoopThread thread;
 
     private Bitmap bg1 = BitmapFactory.decodeResource(getResources(), R.drawable.game_background);
     private Bitmap background = Bitmap.createScaledBitmap(bg1, 720, 1280, false);
@@ -28,31 +29,27 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     private Bitmap button3 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button4 = Bitmap.createScaledBitmap(b1, 144, 144, false);
 
-    public GameSurfaceView(Context context) {
-        super(context);
-        sh = getHolder();
+
+    public GameSurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        SurfaceHolder sh = getHolder();
         sh.addCallback(this);
+
+        thread = new GameLoopThread(context, sh);
     }
     public void surfaceCreated(SurfaceHolder holder) {
-        Canvas canvas = sh.lockCanvas(null);
-        onDraw(canvas);
-        sh.unlockCanvasAndPost(canvas);
+        thread.unpause();
     }
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
     }
     public void surfaceDestroyed(SurfaceHolder holder) {
+        thread.pause();
     }
-   
-    @Override
-    protected void onDraw(Canvas canvas){
-        canvas.drawColor(Color.BLACK);
-        canvas.drawBitmap(background, 0, 0, null);
-        canvas.drawBitmap(button1, 72, 1024, null);
-        canvas.drawBitmap(button2, 216, 1024, null);
-        canvas.drawBitmap(button3, 360, 1024, null);
-        canvas.drawBitmap(button4, 504, 1024, null);
-        canvas.drawBitmap(rednote, 72, redY, null);
-        redY++;
+    public GameLoopThread getRenderThread(){
+        return thread;
     }
+
+
+
 }
