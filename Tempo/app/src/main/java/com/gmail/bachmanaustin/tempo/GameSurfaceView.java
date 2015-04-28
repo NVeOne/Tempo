@@ -16,10 +16,17 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     private SurfaceHolder sh;
 
     private Bitmap bg1 = BitmapFactory.decodeResource(getResources(), R.drawable.game_background);
-    Bitmap background = Bitmap.createScaledBitmap(bg1, 720, 1280, false);
+    private Bitmap background = Bitmap.createScaledBitmap(bg1, 720, 1280, false);
 
     private Bitmap rn1 = BitmapFactory.decodeResource(getResources(), R.drawable.red_note);
-    Bitmap rednote = Bitmap.createScaledBitmap(rn1, 144, 144, false);
+    private Bitmap rednote = Bitmap.createScaledBitmap(rn1, 144, 144, false);
+    private int redY = -144;
+
+    private Bitmap b1 = BitmapFactory.decodeResource(getResources(), R.drawable.button);
+    private Bitmap button1 = Bitmap.createScaledBitmap(b1, 144, 144, false);
+    private Bitmap button2 = Bitmap.createScaledBitmap(b1, 144, 144, false);
+    private Bitmap button3 = Bitmap.createScaledBitmap(b1, 144, 144, false);
+    private Bitmap button4 = Bitmap.createScaledBitmap(b1, 144, 144, false);
 
     public GameSurfaceView(Context context) {
         super(context);
@@ -36,10 +43,16 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     }
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
+   
     @Override
     protected void onDraw(Canvas canvas){
         canvas.drawColor(Color.BLACK);
         canvas.drawBitmap(background, 0, 0, null);
-        canvas.drawBitmap(rednote, 100, 100, null);
+        canvas.drawBitmap(button1, 72, 1024, null);
+        canvas.drawBitmap(button2, 216, 1024, null);
+        canvas.drawBitmap(button3, 360, 1024, null);
+        canvas.drawBitmap(button4, 504, 1024, null);
+        canvas.drawBitmap(rednote, 72, redY, null);
+        redY++;
     }
 }
