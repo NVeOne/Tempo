@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.view.SurfaceHolder;
 
 public class GameLoopThread extends Thread {
+
     private SurfaceHolder holder;
     static final long FPS = 30;
     private boolean running = false;

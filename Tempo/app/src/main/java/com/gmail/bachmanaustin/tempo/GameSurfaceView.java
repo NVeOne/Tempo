@@ -67,10 +67,10 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         if(canvas == null){
             return;
         }
-        //time in seconds
+        //time in seconds from start
         time += 1/30.0;
+        //background
         canvas.drawColor(Color.BLACK);
-        //Background
         canvas.drawBitmap(background, 0, 0, null);
 
         //Notes
@@ -110,5 +110,4 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         canvas.drawBitmap(button3, 360, 1024, null);
         canvas.drawBitmap(button4, 504, 1024, null);
     }
-
 }

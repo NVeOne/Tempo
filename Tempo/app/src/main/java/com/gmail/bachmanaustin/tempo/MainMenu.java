@@ -1,6 +1,7 @@
 package com.gmail.bachmanaustin.tempo;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +10,6 @@ import android.view.View;
 
 
 public class MainMenu extends ActionBarActivity {
-
     public void openGame( View view ){
         Intent i = new Intent(this, GameActivity.class);
         startActivity(i);
