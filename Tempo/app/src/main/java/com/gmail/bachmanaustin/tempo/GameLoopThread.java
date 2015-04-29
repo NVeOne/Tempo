@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 
 public class GameLoopThread extends Thread {
     private SurfaceHolder holder;
-    static final long FPS = 10;
+    static final long FPS = 30;
     private boolean running = false;
     private boolean paused = true;
     /*private Bitmap bg1 = BitmapFactory.decodeResource(getResources(), R.drawable.game_background);
@@ -63,7 +63,7 @@ public class GameLoopThread extends Thread {
                 if (sleepTime > 0)
                     sleep(sleepTime);
                 else
-                    sleep(10);
+                    sleep(30);
             } catch (Exception e) {
             }
         }
