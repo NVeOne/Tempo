@@ -25,12 +25,12 @@ public class GameLoopThread extends Thread {
     private Bitmap button2 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button3 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button4 = Bitmap.createScaledBitmap(b1, 144, 144, false);*/
-   // private Game game;
+    private Game game;
 
 
     GameLoopThread(Context context, SurfaceHolder holder){
         this.holder = holder;
-        //this.game = new Game(context);
+        this.game = new Game(context);
     }
    // public Game getGame(){
        // return game;
@@ -96,6 +96,6 @@ public class GameLoopThread extends Thread {
         }
         canvas.drawColor(Color.BLACK);
 
-        //game.render(canvas);
+        game.render(canvas);
     }
 }

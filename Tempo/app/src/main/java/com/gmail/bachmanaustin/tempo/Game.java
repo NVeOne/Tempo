@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 
 public class Game {
     Context ctx;
-    Canvas canvas = null;
     public Game (Context context){
         ctx = context;
     }
