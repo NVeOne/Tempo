@@ -10,7 +10,6 @@ import android.view.SurfaceHolder;
 public class GameLoopThread extends Thread {
     private SurfaceHolder holder;
     static final long FPS = 10;
-    //private GameSurfaceView view;
     private boolean running = false;
     private boolean paused = true;
     /*private Bitmap bg1 = BitmapFactory.decodeResource(getResources(), R.drawable.game_background);
@@ -25,20 +24,17 @@ public class GameLoopThread extends Thread {
     private Bitmap button2 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button3 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button4 = Bitmap.createScaledBitmap(b1, 144, 144, false);*/
-   // private Game game;
 
+    private GameSurfaceView view;
 
-    GameLoopThread(Context context, SurfaceHolder holder){
+    GameLoopThread(Context context, SurfaceHolder holder, GameSurfaceView view){
         this.holder = holder;
+        this.view = view;
         //this.game = new Game(context);
     }
-   // public Game getGame(){
-       // return game;
-   // }
-
-    /*public void setRunning(boolean run) {
-        running = run;
-    }*/
+    //public Game getGame(){
+        //return game;
+    //}
 
     @Override
     public void run() {
@@ -56,7 +52,7 @@ public class GameLoopThread extends Thread {
             startTime = System.currentTimeMillis();
             try {
                 canvas = holder.lockCanvas(null);
-                draw(canvas);
+                view.onDraw(canvas);
             } finally {
                 if (canvas != null) {
                     holder.unlockCanvasAndPost(canvas);
@@ -90,12 +86,12 @@ public class GameLoopThread extends Thread {
         paused = false;
     }
 
-    private void draw(Canvas canvas){
+    /*private void draw(Canvas canvas){
         if(canvas == null){
             return;
         }
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.RED);
 
-        //game.render(canvas);
-    }
+        game.render(canvas);
+    }*/
 }

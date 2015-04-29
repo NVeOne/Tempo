@@ -9,7 +9,7 @@ import android.graphics.Canvas;
 public class Game {
     Context ctx;
     public Game (Context context){
-        ctx = context;
+        this.ctx = context;
     }
     public Bitmap bg1 = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.game_background);
     public Bitmap background = Bitmap.createScaledBitmap(bg1, 720, 1280, false);

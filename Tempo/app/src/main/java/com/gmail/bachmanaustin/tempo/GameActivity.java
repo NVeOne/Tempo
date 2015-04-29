@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 public class GameActivity extends Activity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "GameActivity";
     private GameLoopThread thread;
 
 
