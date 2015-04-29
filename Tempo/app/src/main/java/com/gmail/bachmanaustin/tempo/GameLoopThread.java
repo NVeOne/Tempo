@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 
 public class GameLoopThread extends Thread {
     private SurfaceHolder holder;
-    //static final long FPS = 10;
+    static final long FPS = 10;
     //private GameSurfaceView view;
     private boolean running = false;
     private boolean paused = true;
@@ -25,12 +25,12 @@ public class GameLoopThread extends Thread {
     private Bitmap button2 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button3 = Bitmap.createScaledBitmap(b1, 144, 144, false);
     private Bitmap button4 = Bitmap.createScaledBitmap(b1, 144, 144, false);*/
-    private Game game;
+   // private Game game;
 
 
     GameLoopThread(Context context, SurfaceHolder holder){
         this.holder = holder;
-        this.game = new Game(context);
+        //this.game = new Game(context);
     }
    // public Game getGame(){
        // return game;
@@ -42,9 +42,9 @@ public class GameLoopThread extends Thread {
 
     @Override
     public void run() {
-       // long ticksPS = 1000 / FPS;
-        //long startTime;
-        //long sleepTime;
+        long ticksPS = 1000 / FPS;
+        long startTime;
+        long sleepTime;
         while (running) {
             while (paused) {
                 try{
@@ -53,7 +53,7 @@ public class GameLoopThread extends Thread {
             }
         }
             Canvas canvas = null;
-            //startTime = System.currentTimeMillis();
+            startTime = System.currentTimeMillis();
             try {
                 canvas = holder.lockCanvas(null);
                 draw(canvas);
@@ -62,14 +62,14 @@ public class GameLoopThread extends Thread {
                     holder.unlockCanvasAndPost(canvas);
                 }
             }
-           // sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
-            /*try {
+            sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
+            try {
                 if (sleepTime > 0)
                     sleep(sleepTime);
                 else
                     sleep(10);
             } catch (Exception e) {
-            }*/
+            }
         }
     }
     public void halt(){
@@ -96,6 +96,6 @@ public class GameLoopThread extends Thread {
         }
         canvas.drawColor(Color.BLACK);
 
-        game.render(canvas);
+        //game.render(canvas);
     }
 }
