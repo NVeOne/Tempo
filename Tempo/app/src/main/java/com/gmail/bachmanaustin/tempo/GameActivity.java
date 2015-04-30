@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+
 public class GameActivity extends Activity {
 
     private static final String TAG = "GameActivity";
@@ -21,10 +22,7 @@ public class GameActivity extends Activity {
         mp.start();
         thread = surfaceView.getRenderThread();
         thread.start();
-
-
     }
-
 
     @Override
     protected void onDestroy() {
@@ -42,5 +40,4 @@ public class GameActivity extends Activity {
             }
         }
     }
-
 }
