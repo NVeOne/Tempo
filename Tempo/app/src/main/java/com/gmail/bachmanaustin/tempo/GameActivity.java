@@ -23,7 +23,17 @@ public class GameActivity extends Activity {
         thread = surfaceView.getRenderThread();
         thread.start();
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mp != null){
+            mp.stop();
+            if (isFinishing()){
+                mp.stop();
+                mp.release();
+            }
+        }
+    }
     @Override
     protected void onDestroy() {
         mp.pause();
